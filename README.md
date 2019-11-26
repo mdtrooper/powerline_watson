@@ -19,64 +19,26 @@ for example in `.config/powerline/themes/shell/default.json`:
 
 ```json
 {
-    "function": "powerline_swissarmyknife.execute",
-    "priority": 30,
-    "args": {
-        "commandLine": "ps aux --no-headers | wc -l",
-        "postContent": "⚙️"
-    }
+    "function": "powerline_watson.status",
+    "priority": 30
 },
 ```
 
-Show the number of processes running in your system.
+It shows a segment with time as hh:mm:ss and tags.
 
-![screenshot number processes](https://raw.githubusercontent.com/mdtrooper/powerline_swissarmyknife/master/powerline_swissarmyknife_number_processes.jpg "screenshot number processes")
+![screenshot powerline_watson](https://raw.githubusercontent.com/mdtrooper/powerline_watson/master/powerline_watson.screenshot.jpg "screenshot powerline_watson")
 
 ### Arguments
-* **commandLine (string)**: The command line to execute, it can be complex (with pipes) (remember python3 runs as /bin/sh, not bash).
 * **line (string)**: The string to format the content of segment.
-  * Default: "{preContent}{output}{err}{postContent}"
-* **preContent (string)**: The string to show before the result.
-  * Default: ""
-* **postContent (string)**: The string to show after the result.
-  * Default: "🤖"
-* **successCodes (list(int) or None)**: The values are success code return (normally 0), the background change to critical success.
-  * Default: None
-* **failureCodes (list(int) or None)**: The values are fail code return, the background change to critical failture. 
-  * Default: None
-
-### Examples
-
-Shows the upload and download rate and count of torrents download in Deluge.
-
-```json
-{
-    "function": "powerline_swissarmyknife.execute",
-    "priority": 30,
-    "args": {
-        "commandLine": "deluge-console status | awk '/Total upload:/{print $3$4} /Total download:/{print $3$4} /Downloading:/{print $2\"D\"}' | tr '\n' ' '",
-        "postContent": "️"
-    }
-},
-```
-
-
-![screenshot deluge](https://raw.githubusercontent.com/mdtrooper/powerline_swissarmyknife/master/powerline_deluge.jpg "screenshot deluge")
-
-Show a random pornstar from redtube api.
-
-```json
-{
-    "function": "powerline_swissarmyknife.execute",
-    "priority": 30,
-    "args": {
-        "commandLine": "if [ -f /tmp/list.redtube.json ]; then list=$(cat /tmp/list.redtube.json); else list=$(curl 'https://api.redtube.com/?data=redtube.Stars.getStarList&output=json'); echo $list > /tmp/list.redtube.json; fi; list_length=$(echo $list | jq '.stars | length'); rand=$(echo 'ibase=16;' $(openssl rand -hex 4 | tr '[a-z]' '[A-Z]')  | bc); echo $list | jq \".stars[$(echo \\\"$rand % $list_length\\\" | bc)].star.star_name\" -r",
-        "postContent": " 🎥"
-    }
-},
-```
-
-![screenshot pornstar](https://raw.githubusercontent.com/mdtrooper/powerline_swissarmyknife/master/powerline_pornstar.jpg "screenshot pornstar")
+  * Default: "{time}({tags})⏲️"
+    * **PlaceHolders**:
+      * **{time}**: The time elapsed (as hh:mm:ss) in the task.
+      * **{start}**: The datetime when started the task.
+      * **{tags}**: The list of the tags.
+      * **{project}**: The project name.
+      * **{human_time}**: The time in human format example 'a minute ago'.
+* **notask (string)**: The string to show when watson is stopped.
+  * Default: "Free"
 
 ## License
 

@@ -25,16 +25,17 @@ def status(pl, line='{time}({tags})⏲️', notask="Free", *args, **kwargs):
     """
         Return a segment shows the time tracked in watson. 
         Args:
-            pl (object): The powerline logger. 
-            commandLine (string): The command line to execute, it can be complex (with pipes).
+            pl (object): The powerline logger.
             line (string): The string to format the content of segment.
                 Default value: {time}({tags})⏲️
-            PlaceHolders:
-                {time}: The time elapsed in the task.
-                {start}: The datetime when started the task.
-                {tags}: The list of the tags.
-                {project}: The project name.
-                {human_time}: The time in human format example 'a minute ago'.
+                PlaceHolders:
+                    {time}: The time elapsed (as hh:mm:ss) in the task.
+                    {start}: The datetime when started the task.
+                    {tags}: The list of the tags.
+                    {project}: The project name.
+                    {human_time}: The time in human format example 'a minute ago'.
+            notask (string): The string to show when watson is stopped.
+                Default value: Free
                 
         Returns:
             segment (list(dict)): The formated line with output of execution command line as powerline segment.
