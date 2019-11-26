@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="powerline_watson",
-    version="1.0.0",
+    version="1.0.1",
     license="GPLv3+",
     author="Miguel de Dios Matias",
     author_email="tres.14159@gmail.com",
